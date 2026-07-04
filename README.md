@@ -2,6 +2,11 @@
 
 OrchestrAI is a configuration-driven, low-code API orchestration engine that empowers developers to build, secure, cache, and deploy production-grade REST APIs visually. By combining a graph-based drag-and-drop canvas with an intelligent Gemini-powered AI Architect, the platform eliminates backend boilerplate code and lets you go from design to live endpoints in seconds.
 
+> [!IMPORTANT]
+> **Evaluator Test Account Credentials:**
+> *   **Email**: `sumukeshmopuram1@gmail.com`
+> *   **Password**: `12345678`
+
 ---
 
 ## 🚀 Key Features
