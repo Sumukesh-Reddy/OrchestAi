@@ -72,10 +72,10 @@ export default function Dashboard() {
         </div>
         <Link
           to="/ai"
-          className="flex items-center space-x-2 bg-gradient-to-r from-brand-600/10 to-indigo-600/10 border border-brand-500/20 hover:border-brand-500/40 text-brand-300 py-2 px-4 rounded-xl text-sm transition-all duration-300 hover:shadow-glow-brand"
+          className="group flex items-center space-x-2 bg-gradient-to-r from-amber-600/10 to-yellow-600/10 border border-amber-500/20 hover:border-amber-500/50 text-amber-300 py-2 px-4 rounded-xl text-sm transition-all duration-300 hover:shadow-[0_0_15px_rgba(245,158,11,0.25)]"
         >
-          <Sparkles size={16} />
-          <span>Ask AI Assistant</span>
+          <Sparkles size={16} className="text-amber-400 group-hover:scale-110 transition-transform duration-200" />
+          <span className="bg-gradient-to-r from-amber-200 to-amber-400 bg-clip-text text-transparent font-medium">Ask AI Assistant</span>
         </Link>
       </div>
 

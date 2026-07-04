@@ -82,21 +82,36 @@ export default function Layout() {
           {navItems.map((item) => {
             const ActiveIcon = item.icon;
             const active = isActive(item.path);
+            const isAi = item.name === 'AI Assistant';
             return (
               <Link
                 key={item.name}
                 to={item.path}
                 onClick={() => setSidebarOpen(false)}
                 className={`
-                  flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200
+                  group flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200
                   ${active 
-                    ? 'bg-brand-500/10 text-brand-300 border-l-2 border-brand-500 shadow-glow-brand font-semibold' 
-                    : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900/50'
+                    ? (isAi 
+                        ? 'bg-amber-500/10 border-l-2 border-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.15)] font-semibold' 
+                        : 'bg-brand-500/10 text-brand-300 border-l-2 border-brand-500 shadow-glow-brand font-semibold'
+                      ) 
+                    : (isAi 
+                        ? 'text-slate-400 hover:bg-amber-500/5' 
+                        : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900/50'
+                      )
                   }
                 `}
               >
-                <ActiveIcon size={18} className={active ? 'text-brand-400' : 'text-slate-400'} />
-                <span>{item.name}</span>
+                <ActiveIcon 
+                  size={18} 
+                  className={active 
+                    ? (isAi ? 'text-amber-400' : 'text-brand-400') 
+                    : (isAi ? 'text-amber-500/50 group-hover:text-amber-400' : 'text-slate-400 group-hover:text-slate-100')
+                  } 
+                />
+                <span className={isAi ? 'bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent font-semibold drop-shadow-[0_0_8px_rgba(245,158,11,0.15)]' : ''}>
+                  {item.name}
+                </span>
               </Link>
             );
           })}
