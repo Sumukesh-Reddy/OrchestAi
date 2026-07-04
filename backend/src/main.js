@@ -36,9 +36,15 @@ async function bootstrap() {
       logger.info(`Metrics endpoint available at http://localhost:${config.server.port}/metrics`);
     });
 
+    // Start 5-minute liveness logging loop
+    const livenessLogInterval = setInterval(() => {
+      logger.info('Server is live and healthy');
+    }, 5 * 60 * 1000);
+
     // 6. Setup Graceful Shutdown
     const shutdown = async (signal) => {
       logger.info(`Received signal: ${signal}. Commencing graceful shutdown...`);
+      clearInterval(livenessLogInterval);
 
       // Set timeout for force close
       const forceCloseTimeout = setTimeout(() => {
