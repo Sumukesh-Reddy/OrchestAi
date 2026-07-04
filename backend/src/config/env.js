@@ -87,7 +87,7 @@ const config = Object.freeze({
   },
 
   cors: {
-    origins: (process.env.CORS_ORIGINS || 'http://localhost:5173,http://localhost:3001')
+    origins: (process.env.CORS_ORIGINS || 'http://localhost:5173,http://localhost:3001,https://orchest-ai-five.vercel.app,https://orchest-ai-five.vercel.app/')
       .split(',')
       .map((o) => o.trim()),
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
