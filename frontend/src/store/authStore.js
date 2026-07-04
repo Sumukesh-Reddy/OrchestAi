@@ -2,8 +2,9 @@ import { create } from 'zustand';
 import axios from 'axios';
 
 // Create a globally accessible axios instance for all APIs
+const apiBase = import.meta.env.VITE_API_BASE_URL || '';
 export const api = axios.create({
-  baseURL: '/api/v1',
+  baseURL: `${apiBase}/api/v1`,
   headers: {
     'Content-Type': 'application/json',
   },

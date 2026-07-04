@@ -61,7 +61,10 @@ export default function ApiTester() {
     const start = Date.now();
 
     try {
-      const url = customUrl || (selectedRoute ? `/api/v1/exposed${selectedRoute.path}` : '');
+      const apiBase = import.meta.env.VITE_API_BASE_URL || '';
+      const url = customUrl
+        ? (customUrl.startsWith('http') ? customUrl : `${apiBase}${customUrl}`)
+        : (selectedRoute ? `${apiBase}/api/v1/exposed${selectedRoute.path}` : '');
       if (!url) { alert('Please select a route or enter a URL.'); setLoading(false); return; }
 
       const reqHeaders = {};
