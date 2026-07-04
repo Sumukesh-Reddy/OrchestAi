@@ -79,10 +79,6 @@ export default function HomePage() {
       <section className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 pt-16 md:pt-28 pb-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         {/* Left Column Text */}
         <div className="lg:col-span-7 space-y-6 text-left">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-xs font-semibold text-brand-300 shadow-sm animate-pulse">
-            <Zap size={12} className="text-brand-400" />
-            <span>🚀 Built for Modern API Integration</span>
-          </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight text-slate-100">
             Build Enterprise API Workflows <br />
