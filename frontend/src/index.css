@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#060814] text-slate-200 font-sans selection:bg-brand-500 selection:text-white;
+  }
+}
+
+/* Custom Scrollbar Styles for Sleek look */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-950;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800 rounded-full hover:bg-slate-700;
+}
+
+/* React Flow custom visual stylings */
+.react-flow__pane {
+  @apply bg-[#03060f];
+}
+
+.react-flow__background {
+  background-color: #03060f !important;
+}
+
+.react-flow__edge-path {
+  stroke: #475569 !important;
+  stroke-width: 2.5px !important;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #8b5cf6 !important;
+  stroke-width: 3px !important;
+  filter: drop-shadow(0 0 4px rgba(139, 92, 246, 0.4));
+}
+
+.react-flow__controls {
+  @apply !bg-slate-900/90 !border-slate-800/80 !shadow-lg !rounded-lg !overflow-hidden;
+}
+
+.react-flow__controls-button {
+  @apply !border-slate-800 !bg-transparent !text-slate-400 hover:!bg-slate-800 hover:!text-slate-100 !fill-current;
+}
+
+/* Premium Card Glassmorphism Class */
+.glass-panel {
+  @apply bg-slate-900/40 backdrop-blur-md border border-slate-800/50 rounded-xl shadow-lg;
+}
+
+.glass-panel-interactive {
+  @apply glass-panel hover:border-brand-500/30 transition-all duration-300 hover:shadow-glow-brand;
+}
+
+/* Micro-animations and glow utilities */
+.glow-effect-brand {
+  filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.2));
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.25; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

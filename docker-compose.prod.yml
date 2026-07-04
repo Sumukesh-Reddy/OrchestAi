@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: orchestai-frontend-prod
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: always
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: orchestai-backend-prod
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+      - MONGODB_URI=mongodb://mongodb:27017/orchestai
+      - REDIS_URL=redis://redis:6379
+      - JWT_SECRET=super_prod_secret_sign_key_please_change_me
+      - JWT_REFRESH_SECRET=super_prod_secret_refresh_key_please_change_me
+      - GEMINI_API_KEY=your_gemini_api_key_here
+      - GEMINI_MODEL=gemini-2.5-flash
+      - LOG_LEVEL=info
+      - LOG_DIR=logs
+    depends_on:
+      - mongodb
+      - redis
+    volumes:
+      - backend-logs:/usr/src/app/logs
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+
+  mongodb:
+    image: mongo:6.0
+    container_name: orchestai-mongodb-prod
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 2G
+
+  redis:
+    image: redis:7.0-alpine
+    container_name: orchestai-redis-prod
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+volumes:
+  backend-logs:
+  mongodb-data:
+  redis-data:
