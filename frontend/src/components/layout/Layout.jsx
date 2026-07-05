@@ -15,7 +15,8 @@ import {
   X,
   Activity,
   Zap,
-  BookOpen
+  BookOpen,
+  FileCode
 } from 'lucide-react';
 
 export default function Layout() {
@@ -38,6 +39,7 @@ export default function Layout() {
     { name: 'API Tester', path: '/tester', icon: Zap },
     { name: 'AI Assistant', path: '/ai', icon: Sparkles },
     { name: 'Node Guide', path: '/guide', icon: BookOpen },
+    { name: 'API Docs (Swagger)', path: import.meta.env.VITE_API_BASE_URL ? `${import.meta.env.VITE_API_BASE_URL}/docs` : '/docs', icon: FileCode, isExternal: true },
     { name: 'System Status', path: '/status', icon: Activity },
   ];
 
@@ -81,13 +83,17 @@ export default function Layout() {
         <nav className="flex-1 px-4 py-6 space-y-1">
           {navItems.map((item) => {
             const ActiveIcon = item.icon;
-            const active = isActive(item.path);
+            const active = item.isExternal ? false : isActive(item.path);
             const isAi = item.name === 'AI Assistant';
+            const LinkComponent = item.isExternal ? 'a' : Link;
+            const linkProps = item.isExternal 
+              ? { href: item.path, target: '_blank', rel: 'noopener noreferrer', onClick: () => setSidebarOpen(false) } 
+              : { to: item.path, onClick: () => setSidebarOpen(false) };
+
             return (
-              <Link
+              <LinkComponent
                 key={item.name}
-                to={item.path}
-                onClick={() => setSidebarOpen(false)}
+                {...linkProps}
                 className={`
                   group flex items-center space-x-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200
                   ${active 
@@ -112,7 +118,7 @@ export default function Layout() {
                 <span className={isAi ? 'bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500 bg-clip-text text-transparent font-semibold drop-shadow-[0_0_8px_rgba(245,158,11,0.15)]' : ''}>
                   {item.name}
                 </span>
-              </Link>
+              </LinkComponent>
             );
           })}
         </nav>
